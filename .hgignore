@@ -9,3 +9,9 @@ syntax: regexp
 ^DislikeButtonPlugin\.Server/bin$
 syntax: regexp
 ^DislikeButtonPlugin\.Server/obj$
+syntax: regexp
+^_ReSharper\.DislikeAnything$
+syntax: regexp
+^DislikeAnything\.Server/bin$
+syntax: regexp
+^DislikeAnything\.Server/obj$
