@@ -1,0 +1,11 @@
+#eggcrate
+{
+	position: fixed;
+	background-color: #000;
+	color: #FFF;
+	top:0;
+	right:0;
+	width:150px;
+	height:150px;
+	overflow-y:scroll;
+}

@@ -1,0 +1,11 @@
+
+syntax: regexp
+^DislikePuttonPlugin\.5\.0\.ReSharper\.user$
+syntax: regexp
+^DislikeAnything\.suo$
+syntax: regexp
+^_ReSharper\.DislikeButtonPlugin$
+syntax: regexp
+^DislikeButtonPlugin\.Server/bin$
+syntax: regexp
+^DislikeButtonPlugin\.Server/obj$

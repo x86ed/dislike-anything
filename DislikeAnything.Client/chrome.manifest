@@ -1,0 +1,9 @@
+content     dislikebuttonplugin    content/
+content     dislikebuttonplugin    content/ contentaccessible=yes
+
+overlay chrome://browser/content/browser.xul chrome://dislikebuttonplugin/content/browser.xul
+
+locale	eggcrate	en-US	locale/en-US/
+
+skin	dislikebuttonplugin	classic/1.0	skin/
+style	chrome://global/content/customizeToolbar.xul	chrome://dislikebuttonplugin/skin/skin.css

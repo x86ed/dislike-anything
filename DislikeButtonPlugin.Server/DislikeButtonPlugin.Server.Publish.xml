@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="C:\Users\Brandon Fisch\Desktop\DislikeAnything" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="bin/DislikeButtonPlugin.Server.dll" publishTime="10/05/2011 01:38:13" />
+    <file relUrl="GraphObject.aspx" publishTime="10/01/2011 12:09:03" />
+    <file relUrl="Login.aspx" publishTime="10/04/2011 00:36:35" />
+    <file relUrl="bin/DislikeButtonPlugin.Server.pdb" publishTime="10/05/2011 01:38:12" />
+    <file relUrl="Web.config" publishTime="10/05/2011 10:18:17" />
+    <file relUrl="GraphConnection.ashx" publishTime="10/04/2011 11:34:43" />
+    <file relUrl="Canvas.aspx" publishTime="10/05/2011 10:43:13" />
+    <file relUrl="PopupIframe.aspx" publishTime="10/03/2011 15:06:14" />
+  </publishProfile>
+</publishData>
