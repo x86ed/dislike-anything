@@ -6,7 +6,8 @@ var graph = function(){
 			{
 				"5"  : "event",
 				"7"	 : "photo",
-				"22" : "status"			
+				"17" : "share",
+				"22" : "status"	
 			},
 		
 		getGraphUrl :
@@ -19,15 +20,23 @@ var graph = function(){
 						break;
 					case "photo":
 						endpoint = parameters.target_fbid;
+						url = "https://www.facebook.com/photo.php?fbid=10100446005163905" + parameters.target_fbid;
+						break;
+					case "share":
+						endpoint = parameters.actor + "_" + parameters.target_fbid;
+						url = "https://www.facebook.com/permalink.php?story_fbid=" + parameters.target_fbid + "&id=" + parameters.actor;
 						break;
 					case "status":
 						endpoint = parameters.actor + "_" + parameters.target_fbid;
+						url = "https://www.facebook.com/permalink.php?story_fbid=" + parameters.target_fbid + "&id=" + parameters.actor;
 						break;
 					default:
 						endpoint = "";
 						console.log(parameters);
 						break;
 				}
+				
+				console.log("link to item - " + url);
 				
 				if(endpoint != "")
 					return "https://graph.facebook.com/" + endpoint;

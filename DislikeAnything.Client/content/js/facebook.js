@@ -44,6 +44,14 @@ var facebook = {
     		})
     	},
 	
+	parseAccessToken:
+		function(data, callback){
+			result = JSON.parse(data);
+			console.log(result);
+			if(typeof callback == "function")
+				callback(result.access_token);
+		},
+	
 	popup:
     	function (url, title, width, height) {
 			var left = (window.screen.width / 2) - (width / 2) - 10;
@@ -57,14 +65,6 @@ var facebook = {
 			chrome.tabs.getSelected(null, function(tab){
 				callback(tab.url);
 			});
-		},
-    
-	parseAccessToken:
-		function(data, callback){
-			result = JSON.parse(data);
-			console.log(result);
-			if(typeof callback == "function")
-				callback(result.access_token);
 		},
 		
 	dislike:
@@ -94,11 +94,14 @@ var facebook = {
 
             $.post(url, data, function (response) {
             	responseObject = JSON.parse(response);
-            	if(responseObject.error && responseObject.error.message.indexOf("3501"))
-            		alert("You already dislike this");
-            	
             	if(responseObject.id)
             		alert("You dislike this");
+            	else{
+            		alert("error");
+            		console.log(responseObject)
+            	}
+            	//if(responseObject.error && responseObject.error.message.indexOf("3501"))
+            	//	alert("You already dislike this");
             	
             	if(typeof callback == "function")
 					callback();
