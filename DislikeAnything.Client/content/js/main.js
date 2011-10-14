@@ -24,6 +24,7 @@ var main = function () {
 		
 		addDislikeLinkInFacebook :
 			function(){
+			
 				$(".commentable_item:not(:has(.dislike)):has(input[name=feedback_params])").each(function(){
 					$this = $(this);
 					
