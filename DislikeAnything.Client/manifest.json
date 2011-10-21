@@ -9,8 +9,7 @@
   
   "browser_action": {
 					    "default_icon": "/skin/icons/icon-19.png",
-					    "default_title": "Dislike Anything",
-					    "popup" : "/content/popup.html"
+					    "default_title": "Dislike Anything"
    					},
    					
   "content_scripts": [

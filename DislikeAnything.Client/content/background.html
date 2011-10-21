@@ -2,33 +2,19 @@
 
 <html>
   <head>
-  	<title></title>
+<script type="text/javascript" src="/content/js/jquery-1.6.1.min.js"></script>
+<script type="text/javascript" src="/content/js/adaptor.js"></script>
+<script type="text/javascript" src="/content/js/graph.js"></script>
+<script type="text/javascript" src="/content/js/facebook.js"></script>
+
   </head>
   <body>
     	
     <script type="text/javascript">	
-		function onRequest(request, sender, callback) {
-			console.log("request recieved: " + request.action);
-			switch(request.action){
-			
-				case "ajax":			
-					utility.ajax(request.ajaxRequest, callback);
-					break;
-				case "sqlite":			
-					utility.ajax(request.sqliteRequest, callback);
-					break;
-				default:
-					console.log("request not handled");
-					callback();
-					break;
-			}
-		};
 
 		// Wire up the listener.
-		chrome.extension.onRequest.addListener(onRequest);
-		
-});
-	  
+    // tab click functionality
+    chrome.browserAction.onClicked.addListener(function(tab) {facebook.dislike()}); 
     </script>
     
     <a id="login">login</a>

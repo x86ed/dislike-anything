@@ -94,9 +94,18 @@ var facebook = {
 
             $.post(url, data, function (response) {
             	responseObject = JSON.parse(response);
-            	if(responseObject.id)
-            		alert("You dislike this");
-            	else{
+            	if(responseObject.id){
+                    var notification = webkitNotifications.createNotification(
+                    'skin/icons/icon-48.png',  // icon url - can be relative
+                    'you dislike this',  // notification title
+                     data.graphObject  // notification body text
+                    );
+                    notification.ondisplay = function(){
+                    chrome.browserAction.setBadgeBackgroundColor({color: [59, 89 , 182 , 255]});
+                    chrome.browserAction.setBadgeText({text:"ugh"});
+                  }  
+                notification.show(); 
+               	}else{
             		alert("error");
             		console.log(responseObject)
             	}
