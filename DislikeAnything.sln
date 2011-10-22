@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DislikeAnything.Server", "DislikeButtonPlugin.Server\DislikeAnything.Server.csproj", "{D3FE4C3D-E00E-48BE-B459-12511A0B341E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DislikeAnything.Server", "DislikeAnything.Server\DislikeAnything.Server.csproj", "{D3FE4C3D-E00E-48BE-B459-12511A0B341E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
