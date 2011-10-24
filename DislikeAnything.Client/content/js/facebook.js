@@ -1,7 +1,5 @@
 var facebook = {
 
-	baseDomain: "http://dislikeanything.com",
-	
     uid: "",
 
     access_token: "",
@@ -39,7 +37,7 @@ var facebook = {
     				if(typeof callback == "function")
     					callback(null);
     				
-    				facebook.popup(url, "Login", 640, 246);
+    				utility.popup(url, "Login", 640, 246);
     			}
     		})
     	},
@@ -50,22 +48,7 @@ var facebook = {
 			console.log(result);
 			if(typeof callback == "function")
 				callback(result.access_token);
-		},
-	
-	popup:
-    	function (url, title, width, height) {
-			var left = (window.screen.width / 2) - (width / 2) - 10;
-			var top = (window.screen.height / 2) - (height / 2) - 50;
-		
-			window.open (url,title,"location=1,status=no,scrollbars=no,width=" + width + ",height=" + height + ",resizable=yes,left=" + left + ",top=" + top + ",screenX=" + left + ",screenY=" + top + ",toolbar=no,menubar=no,scrollbars=no,location=no,directories=no").focus();
-		},
-		
-	getCurrentUrl:
-		function(callback){
-			chrome.tabs.getSelected(null, function(tab){
-				callback(tab.url);
-			});
-		},
+		},	
 		
 	getPageDislikeStatus:
 		function(url, callback){
@@ -90,7 +73,7 @@ var facebook = {
 		function(callback){
 			facebook.login(function(accessToken){
 				if(accessToken != null)
-					facebook.getCurrentUrl(function(url){
+					utility.getCurrentUrl(function(url){
 						facebook.postTimeline(facebook.appInfo.namespace, "website", url, "not_like", accessToken, callback);
 					});
 			});
@@ -109,7 +92,7 @@ var facebook = {
 
             console.log(data);
 
-            url = "http://dislikeanything.com/GraphConnection.ashx";
+            url = utility.baseDomain + "/GraphConnection.ashx";
 
             $.post(url, data, function (response) {
             	responseObject = JSON.parse(response);

@@ -55,8 +55,8 @@ $(document).ready(function(){
 	if(location.href.indexOf(facebook.appInfo.redirectUrl) == 0)
 	{
 		facebook.dislike();
-		//window.open('', '_self', '');
-		//window.close();
+		window.open('', '_self', '');
+		window.close();
 	}
 });
 
