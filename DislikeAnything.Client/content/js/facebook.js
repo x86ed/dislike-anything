@@ -57,11 +57,11 @@ var facebook = (function(){
 		});
 	};
 		
-	function dislike(url, accessToken, callback){
-		postTimeline(appInfo.namespace, "website", url, "not_like", accessToken, callback);
+	function dislike(url, accessToken, pageTitle, callback){
+		postTimeline(appInfo.namespace, "website", url, "not_like", accessToken, pageTitle, callback);
 	}
 
-    function postTimeline(appNamespace, graphObjectType, graphObject, action, accessToken, callback) {
+    function postTimeline(appNamespace, graphObjectType, graphObject, action, accessToken, pageTitle, callback) {
 
         var data = {
             appNamespace: appNamespace,
@@ -79,7 +79,7 @@ var facebook = (function(){
         	console.log(response)
         	var responseObject = JSON.parse(response);        	
         	if(typeof callback == "function")
-				callback(responseObject, data);
+				callback(responseObject, data, pageTitle);
         });
     }
     

@@ -17,13 +17,9 @@ var utility = (function(){
 	}
 	
 	return {
-		
-		baseDomain : baseDomain,
-		
-		getCurrentUrl : getCurrentUrl,
-			
-		popup : popup,
-	
+		baseDomain : baseDomain,		
+		getCurrentUrl : getCurrentUrl,			
+		popup : popup,	
 	}
 	
 })();

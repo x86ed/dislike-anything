@@ -24,28 +24,28 @@ var graph = (function(){
 			default:
 				endpoint = parameters.actor + "_" + parameters.target_fbid;
 				url = "https://www.facebook.com/permalink.php?story_fbid=" + parameters.target_fbid + "&id=" + parameters.actor;
-				console.log(parameters);
 				break;
 		}
 		
-		//console.log("link to item - " + url);
-		
-		if(endpoint != ""){
-			//return "https://graph.facebook.com/" + endpoint;
-			endpoint = "https://graph.facebook.com/" + endpoint;
-		}		
+		endpoint = "https://graph.facebook.com/" + endpoint;
 		
 		return {
 			url : url, 
-			endpoint : endpoint
+			endpoint : endpoint,
+			actor : parameters.actor
 		};
+	}
+	
+	function generateDislikeUrl(parameters, accessToken, callback){
+		getGraphNode(parameters, accessToken, function(graphNode){
+			var url = utility.baseDomain + "/GraphObject.aspx?url=" +  encodeURIComponent(graphNode.url) + "&title=" + encodeURIComponent(graphNode.pageTitle) + "&type=website";
+			callback(url, graphNode.title);
+		});
 	}
 	
 	function getGraphNode(parameters, accessToken, callback){
 		var graphUrl = getGraphUrl(parameters);
-		console.log(graphUrl);
 		var url = graphUrl.endpoint + "?access_token=" + accessToken;
-		console.log(url);
 		$.get(url, function(result){
 			getGraphNodeComplete(result, graphUrl, callback);
 		}).error(function(error){
@@ -54,14 +54,29 @@ var graph = (function(){
 	}
 	
 	function getGraphNodeComplete(response, graphUrl, callback){
-		graphObject = JSON.parse(response);
-		graphObject.url = graphUrl.url;
-		graphObject.endpoint = graphUrl.endpoint;
-		callback(graphObject);
+		var graphNode = JSON.parse(response);
+		console.log(graphNode);
+		if(graphNode == false){
+			graphNode = graphUrl;
+			graphNode.pageTitle = "";
+			$.get("https://graph.facebook.com/" + graphNode.actor, function(r){
+				graphNode.title = JSON.parse(r).name + "'s post";
+				callback(graphNode);
+			}).error(function(error){
+				graphNode.pageTitle = JSON.parse(error.responseText).name + "'s post";
+				callback(graphNode);
+			});				
+		} else {
+			graphNode.url = graphUrl.url;
+			graphNode.endpoint = graphUrl.endpoint;
+			graphNode.title = graphNode.from.name + "'s post";
+			callback(graphNode);
+		}		
 	}
 	
 	return {		
 		getGraphUrl : getGraphUrl,
-		getGraphNode : getGraphNode
+		getGraphNode : getGraphNode,
+		generateDislikeUrl: generateDislikeUrl
 	}
 })();

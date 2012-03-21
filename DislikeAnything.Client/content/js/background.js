@@ -37,39 +37,51 @@ var background = (function(){
 	};
 	
 	function dislike(){
-		graph.getGraphNode(requestParameters, accessToken, getGraphNodeComplete);
+		//graph.getGraphNode(requestParameters, accessToken, getGraphNodeComplete);
+		graph.generateDislikeUrl(requestParameters, accessToken, generateDislikeUrlComplete);
 	}
 	
 	function dislikeUrl(){
-		console.log("dislikeUrl")
-		console.log(dislikedUrl)
-		facebook.dislike(dislikedUrl, accessToken, dislikeComplete);
+		$.get(dislikedUrl, function(response){
+			var titleMatch  = response.match(/<title>(.*)<\/title>/);
+			var pageTitle = dislikedUrl;
+			if(titleMatch.length >= 0){
+				pageTitle = titleMatch[1];
+			}
+			console.log(pageTitle)
+			var asciiCodeArray = pageTitle.match(/&#(.*);/);
+			console.log(asciiCodeArray)
+			for(var i = 0; i<asciiCodeArray.length; i+=2){
+				pageTitle = pageTitle.replace(asciiCodeArray[i], String.fromCharCode(asciiCodeArray[i+1]));
+			}
+			
+			facebook.dislike(dislikedUrl, accessToken, pageTitle, dislikeComplete);
+		});
 	}
 	
 	function getGraphNodeComplete(graphNode){
 		console.log("graphNode");
 		console.log(graphNode)
-		console.log("accessToken - " + accessToken)
-		if(dislikedUrl == null) return;
-		
-		facebook.dislike(dislikedUrl, accessToken, dislikeComplete);
+		graph.generateDislikeUrl(graphNode, generateDislikeUrlComplete);		
 	}
 	
-	function dislikeComplete(responseObject, data){
-		$.get(data.graphObject, function(response){
-			var title  = response.match(/<title>(.*)<\/title>/)[1];
-			if(responseObject.id){
-				showNotification("you dislike this", title);
-	       	}else{
-	       		if(responseObject.error && responseObject.error.message.indexOf("3501")){
-	       			showNotification("You already dislike this", title);
-	        	}
-	    	}
-			
-			dislikedUrl = null;
-			requestParameters = null;
-			dislikeType = null;
-		});		
+	function generateDislikeUrlComplete(url, pageTitle){
+		dislikedUrl = url;
+		facebook.dislike(dislikedUrl, accessToken, pageTitle, dislikeComplete);
+	}
+	
+	function dislikeComplete(responseObject, data, pageTitle){		
+		if(responseObject.id){
+			showNotification("You Dislike This:", pageTitle);
+       	}else{
+       		if(responseObject.error && responseObject.error.message.indexOf("3501")){
+       			showNotification("You Already Dislike This:", pageTitle);
+        	}
+    	}
+		
+		dislikedUrl = null;
+		requestParameters = null;
+		dislikeType = null;
 	}
 	
 	function showNotification(title, message){		
