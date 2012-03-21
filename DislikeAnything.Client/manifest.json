@@ -20,6 +20,7 @@
 				                        ],
 				            "js" : ["content/js/adaptor.js",
 				            		"content/js/jquery-1.6.1.min.js",
+				            		"content/js/utility.js",
 				            		"content/js/graph.js",
 				            		"content/js/facebook.js",
 				            		"content/js/main.js"

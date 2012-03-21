@@ -23,16 +23,18 @@ namespace DislikeButtonPlugin.Server
             var graphObjectType = context.Request.Params["graphObjectType"];
             var graphObject = context.Request.Params["graphObject"];
 
-            var postData = string.Format("access_token={0}&{1}={2}", accessToken, graphObjectType, graphObject);
+            var postData = string.Format("access_token={0}&{1}={2}", accessToken, graphObjectType, HttpUtility.UrlEncode(graphObject));
 
             var url = string.Format("https://graph.facebook.com/me/{0}:{1}", appNamespace, action);
+
+            url = string.Format("{0}?{1}", url, postData);
+
             var request = WebRequest.Create(url);
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             var byteArray = Encoding.UTF8.GetBytes(postData);
             request.ContentLength = byteArray.Length;
             var dataStream = request.GetRequestStream();
-
             dataStream.Write(byteArray, 0, byteArray.Length);
             dataStream.Close();
 
