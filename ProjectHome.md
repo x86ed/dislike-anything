@@ -1,0 +1,1 @@
+A user can install a browser plugin to give them the ability to dislike anything using the open graph
